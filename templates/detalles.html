@@ -1,0 +1,17 @@
+{% extends "plantilla.html"%}
+{%block titulo%}Inicio{%endblock%}
+	{%block body%}
+    <div class="pedidos">
+        <div class="contenedor_de_pedidos">
+            {%for i in gastos:%}
+                <div class="registros_dia">
+                    <h2 class="numero">{{i.fecha}}</h2>
+                    Motivo: {{i.motivo}}
+                    <br><br>
+                    Gasto: {{'${:,.3f}'.format(i.gasto)}}
+                    <br><br>
+                </div>
+            {%endfor%}
+        </div>
+    </div>
+    {%endblock%}

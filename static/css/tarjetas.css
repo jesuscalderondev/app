@@ -1,0 +1,62 @@
+.contenedor_tarjetas{
+    display: grid;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: 35% 30%;
+    column-gap: 50px;
+}
+
+.tarjeta_proyeccion{
+    background-repeat: no-repeat;
+    background-size: 80px 80px;
+    /*background-size: cover; La imagen cubre todo el fondo */
+    background-position: bottom right; /*La imagen se centra en la pantalla */
+    height: max-content;
+    min-height: 150px;
+    max-height: 200px;
+    max-width: 500px;
+    margin: 10px;
+    border-radius: 8px;
+    padding: 25px;
+    transition: all ease .3s;
+    color: #fff;
+    cursor: pointer;
+}
+
+.porcentaje{
+    background-image: url('/static/img/porcentaje.png');
+    background-color: rgb(182, 53, 49);;
+}
+
+.ganancias{
+    background-image: url('/static/img/ganancias.png');
+    background-color: rgb(64, 190, 131);
+}
+
+.datos_i{
+    background-image: url('/static/img/inversion.png');
+    background-color: rgb(182, 109, 49);
+}
+
+.pro_act{
+    background-image: url('/static/img/pro_act.png');
+    background-color: rgb(49, 111, 182);
+}
+
+.tarjeta_proyeccion:hover{
+    transform: scale(1.2);
+    opacity: 0.9;
+    background-size: 50px 50px;
+}
+.tarjeta_proyeccion b, .titulo_tarjeta, p{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+b{
+    font-size: 24px;
+}
+h2{
+    text-transform: uppercase;
+    text-align: center;
+}

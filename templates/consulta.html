@@ -1,0 +1,45 @@
+{% extends "plantilla.html"%}
+{%block titulo%}Inicio{%endblock%}
+	{%block body%}
+        <div class="consultas">
+            <form id="form_consulta" action="/consulta" method="post">
+                <h2 class="titulo_blanco">PROYECCIONES</h2>
+                <br><br>
+                <select name="producto">
+                    <option class="entrada-login" value="" disabled selected>    --Seleccionar--     </option>
+                    {%for i in productos:%}
+                        <option value="{{i.nombre}}">{{i.nombre}}</option>
+                    {%endfor%}
+                    <br>
+                </select>
+                <br><br>
+                <input  type="number" min="1" name="cantidad" autocomplete="off" placeholder="Cantidad comprada">
+                <br><br>
+                <input type="number" min="1" name="porciones" autocomplete="off" placeholder="Venta por unidad">
+                <button type="submit">Proyectar</button>
+            </form>
+
+            <form action="/detalles_gastos" method="post">
+                <h2 class="titulo_banco">VER GASTOS</h2>
+                <br>
+                <input type="date" name="fecha" pattern="d{4}/d{2}/{2}">
+                <button type="submit">Ver</button>
+            </form>
+        </div>
+
+        <div class="pedidos">
+            <div class="contenedor_de_pedidos">
+                {%for i in registros:%}
+                    <div class="registros_dia">
+                        <h2 class="numero">{{i.fecha}}</h2>
+                        Ventas: {{'${:,.3f}'.format(i.venta)}}
+                        <br><br>
+                        Gastos: {{'${:,.3f}'.format(i.gasto)}}
+                        <br><br>
+                        Ganancia Neta: {{'${:,.3f}'.format(i.venta-i.gasto)}}
+                        <br><br>
+                    </div>
+                {%endfor%}
+            </div>
+        </div>
+    {%endblock%}

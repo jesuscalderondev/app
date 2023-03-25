@@ -1,0 +1,40 @@
+{% extends "plantilla.html"%}
+{%block titulo%}Inicio{%endblock%}
+	{%block body%}
+    <h2 class="titulo">Al hacer la proyección del producto "{{proyeccion.producto}}" se obtuvieron los siguientes resultados</h2>
+    
+    <div class="contenedor_tarjetas">
+        <div class="tarjeta_proyeccion porcentaje">
+            <h2 class="titulo_tarjeta">RELACIÓN VENTAS</h2>
+    
+            <b>{{proyeccion.porcentaje}}%</b>
+            <br>
+            <p>El producto representa el {{proyeccion.porcentaje}}% de sus ventas</p>
+        </div>
+
+        <div class="tarjeta_proyeccion ganancias">
+            <h2 class="titulo_tarjeta">ganancias</h2>
+    
+            <b>{{'${:,.3f}'.format(proyeccion.ganancias)}}</b>
+            <br>
+            <p>El producto dado los datos anteriores dejaría una ganancia de {{'${:,.3f}'.format(proyeccion.ganancias)}} de sus ventas</p>
+        </div>
+
+        <div class="tarjeta_proyeccion datos_i">
+            <h2 class="titulo_tarjeta">INVERSIÓN</h2>
+    
+            <b>{{'${:,.3f}'.format(proyeccion.inversion)}}</b>
+            <br>
+            <p>El producto dado los datos anteriores tendría un balance de inversión de {{'${:,.3f}'.format(proyeccion.ganancias)}} teniendo en cuenta que por cada unidad adquirida usted vende {{proyeccion.porciones}}, entonces tiene como proyección una venta de {{'${:,.3f}'.format(proyeccion.ganancias + proyeccion.inversion)}} sin descontar la inversión, para ver la proyección de la ganancia mire la tarjeta ganancias</p>
+        </div>
+        <div class="tarjeta_proyeccion pro_act">
+            <h2 class="titulo_tarjeta">ACTUAL</h2>
+    
+            <b>{{'${:,.3f}'.format(proyeccion.datos.precio * proyeccion.inventario)}}</b>
+            <br>
+            <p>Actualmente usted posee {{proyeccion.inventario}} unidades del producto por lo que sus ganancias esperadas son las indicadas en la parte superior. </p>
+        </div>
+    </div>
+
+
+    {%endblock%}

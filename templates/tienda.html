@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Integración de pagos Nequi</title>
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script>
+		function realizarPago() {
+			var credenciales = {
+				clientId: "5eaoukaifo3pfl7ncrgn22l1c5",
+				clientSecret: "14anb6lrvf32t0ha4iupa8ne00vpeaou6sffjdvkeuhr6p9hcdg3",
+				grantType: "password",
+				username: "Jesús",
+				password: "2020"
+			};
+
+			$.ajax({
+				url: "https://api.nequi.com/security/oauth-issuer/oauth2/token",
+				type: "POST",
+				dataType: "json",
+				data: credenciales,
+				success: function(data) {
+					var token = data.access_token;
+					var pago = {
+						phoneNumber: "NUMERO_TELEFONO_NEQUI",
+						amount: "VALOR_PAGO",
+						reference: "REFERENCIA_PAGO"
+						
+					};
+
+					$.ajax({
+						url: "https://api.nequi.com/transactional/transactional/v1/payment",
+						type: "POST",
+						dataType: "json",
+						headers: {
+							"Authorization": "Bearer " + token,
+							"Access-Control-Allow-Origin": '*'
+						},
+						data: pago,
+						success: function(data) {
+							console.log("Pago exitoso");
+						},
+						error: function(xhr, status, error) {
+							console.log("Error en el pago: " + error);
+						}
+					});
+				},
+				error: function(xhr, status, error) {
+					console.log("Error en la autenticación: " + error);
+				}
+			});
+		}
+	</script>
+</head>
+<body>
+	<button onclick="realizarPago()">Realizar pago</button>
+</body>
+</html>

@@ -1,0 +1,53 @@
+{% extends "plantilla.html"%}
+{%block titulo%}Pedidos{%endblock%}
+	{%block body%}
+        <div class="contenido">
+            <div class="pedidos">
+                <h2 class="hp">PEDIDOS</h2>
+                <div class="contenedor_de_pedidos">
+                    {% for i in pedidos:%}
+                        <div class="unpedido">
+                            <b>{{pedidos.index(i)+1}}.
+                            {{i.cliente}}
+                            </b>
+                            <br><br>
+                            
+                            {%if i.llevar == 'no':%}
+                                Para acá
+                            {%else%}
+                                Para llevar
+                            {%endif%}
+                            <br><br>
+                            DETALLES: {{i.detalles}}
+                            <br><br>
+                            <li class="productos_pedido"><b>TOTAL:{{'${:,.3f}'.format(i.costo)}}</b></li>
+                            <form action="/listo_o_cancelar" method="POST">
+                                <input name="valor_pedido" type="number" class="nomostrar" value="{{i.costo}}" readonly>
+                                <input name="id" class="nomostrar" type="text" value="{{i.id}}">
+                                <button name="listo" class="listo">TERMINADO</button>
+                                <button name="cancelar" class="edicion">CANCELAR PEDIDO</button>
+                            </form>
+                        </div>
+                    {%endfor%}
+                </div>
+            </div>
+            <div class="usuario">
+                <div class="nombre">
+                    <h2 class="nombre-usuario">{{usuariodata[1]}}</h2>
+                </div>
+                <div class="avatar">
+                    {%if usuariodata.sexo in ['masculino', 'Masculino', 'MACULINO']%}
+                        <img src="{{url_for('static', filename="/img/male.svg")}}" alt="" class="img-avatar">
+                    {%else%}
+                        <img src="{{url_for('static', filename="/img/female.svg")}}" alt="" class="img-avatar">
+                    {%endif%}
+                </div>
+                <hr class="division">
+                <div class="registros">
+                    <h2 class="info-venta">VENTAS HOY: {{'${:,.3f}'.format(ventas_hoy)}}</h2>
+                    <p class="fecha"> <b>fecha:</b> {{fecha}}</p>
+                    <br>
+                </div>
+            </div>
+        </div>
+	{%endblock%}
